@@ -1,0 +1,178 @@
+{
+    "$schema": "ToBeDone",
+    "metadata": {
+        "label": "audio-policy-control-configuration",
+        "info": "Provide Default Audio Policy Control configuration",
+        "version": "1.0"
+    },
+    "onload": [{
+            "label": "onload-default",
+            "info": "onload initialisation config",
+            "plugin": {
+                "label" : "_AudioPolicyPlugin",
+                "sharelib": "ctl-audio-policy.ctlso",
+                "lua2c": ["Lua2cHelloWorld1", "Lua2cHelloWorld2"]
+            },
+            "require": ["alsacore", "intel-hda"],
+            "actions": [
+                {
+                    "label": "onload-audio-cb",
+                    "info": "Call control sharelib install entrypoint",
+                    "callback": "AudioPolicyInit",
+                    "args": {
+                        "audiorole": "Entertainment",
+                        "Volume": "60"
+                    }
+                }, {
+                    "label": "onload-sample-api",
+                    "info": "Assert AlsaCore Presence",   
+                    "api": "alsacore",
+                    "verb": "ping",
+                    "args": {"data": "none"}
+                }, {
+                    "label": "onload-hal-lua",
+                    "info": "Load avaliable HALs",
+                    "lua": "_Alsa_Get_Hal"
+                }
+            ]
+        }],
+    "controls": 
+            [   
+                {
+                    "label": "Mute",
+                    "actions": {
+                            "label": "mute-control-lua",
+                            "info": "Call Lua Script to mute all stream",   
+                            "lua": "_Audio_Set_Mute"
+                        }
+                },         
+                {
+                    "label": "Guidance",
+                    "actions": {
+                            "label": "navigation-control-lua",
+                            "info": "Call Lua Script to set Navigation",   
+                            "lua": "_Audio_Set_Guidance"
+                        }
+                },
+                {
+                    "label": "Entertainment",
+                    "actions": {
+                            "label": "entertainment-control-lua",
+                            "info": "init entertainment stream",   
+                            "lua": "_Audio_Set_Entertainment"
+                        }
+                },
+                {
+                    "label": "Notification",
+                    "actions": {
+                            "label": "notification-control-lua",
+                            "info": "init notification stream",   
+                            "lua": "_Audio_Set_Notification"
+                        }
+                },
+                {
+                    "label": "Communication",
+                    "actions": {
+                            "label": "communications-control-lua",
+                            "info": "init communications stream",   
+                            "lua": "_Audio_Set_Communication"
+                        }
+                },
+                {
+                    "label": "System",
+                    "actions": {
+                            "label": "system-control-lua",
+                            "info": "init system stream",   
+                            "lua": "_Audio_Set_System"
+                        }
+                },
+                {
+                    "label": "Warning",
+                    "actions": {
+                            "label": "warning-control-lua",
+                            "info": "init warning stream",   
+                            "lua": "_Audio_Set_Warning"
+                        }
+                },
+                {
+                    "label" : "setVolume", 
+                    "actions": {
+                            "label": "volume-control-lua",
+                            "info": "Set the volume on an audio stream",   
+                            "lua": "_Audio_Set_Volume"
+                    }
+                },
+                {
+                    "label" : "setEvent", 
+                    "actions": {
+                            "label": "Event-control-lua",
+                            "info": "Set the Event on an audio stream",   
+                            "lua": "_Audio_Set_Events"
+                    }
+                },
+                {
+                    "label" : "setProperty", 
+                    "actions": {
+                            "label": "Property-control-lua",
+                            "info": "Set the Property on an audio stream",   
+                            "lua": "_Audio_Set_Property"
+                    }
+                },
+                {
+                    "label" : "setState", 
+                    "actions": {
+                            "label": "State-control-lua",
+                            "info": "Set the Property on an audio stream",   
+                            "lua": "_Audio_Set_State"
+                    }
+                },
+                {
+                    "label": "multi-step-sample",
+                    "info" : "all actions must succeed for control to be accepted",
+                    "actions": [{
+                            "label": "multimedia-control-cb",
+                            "info": "Call Sharelib Sample Callback",
+                            "callback": "AudioControlNavigation",
+                            "args": {
+                                "arg1": "Navigation",
+                                "arg2": "50"
+                            }
+                        },
+                        {
+                            "label": "guidance-control-lua",
+                            "info": "Call Lua Script to set Guidance",   
+                            "lua": "_Audio_Set_Guidance"
+                        }]
+                }
+            ],
+    "events":
+            [
+                {
+                    "label": "PlayEvent",
+                    "info": "Audio Play Event",
+                    "actions": [
+                        {
+                            "label": "Audio Event Callback",
+                            "callback": "AudioControlEvent",
+                            "args": {
+                                "arg1": "play"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "label": "StopEvent",
+                    "info": "Audio Stop",
+                    "actions": [
+                        {
+                            "label": "Audio Event Callback",
+                            "callback": "AudioControlEvent",
+                            "args": {
+                                "arg1": "stop"
+                            }
+                        }
+                    ]
+                }
+            ]
+}
+

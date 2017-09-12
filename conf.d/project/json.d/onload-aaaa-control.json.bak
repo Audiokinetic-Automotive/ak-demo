@@ -1,0 +1,182 @@
+{
+    "$schema": "ToBeDone",
+    "metadata": {
+        "label": "audio-policy-control-configuration",
+        "info": "Provide Default Audio Policy Control configuration",
+        "version": "1.0"
+    },
+    "onload": [{
+            "label": "onload-default",
+            "info": "onload initialisation config",
+            "require": ["alsacore", "ensoniq"],
+            "actions": [
+                {
+                    "label": "onload-sample-api",
+                    "info": "Assert AlsaCore Presence",   
+                    "api": "alsacore",
+                    "verb": "ping",
+                    "args": {"data": "none"}
+                }, {
+                    "label": "onload-hal-lua",
+                    "info": "Load avaliable HALs",
+                    "lua": "_Alsa_Get_Hal"
+                }
+            ]
+        }],
+    "controls": 
+            [            
+                {
+                    "label": "Warning",
+                    "actions": {
+                            "label": "warning-control-lua",
+                            "info": "init warning stream",   
+                            "lua": "_Audio_Set_Warning"
+                        }
+                },
+                {
+                    "label": "Guidance",
+                    "actions": {
+                            "label": "guidance-control-lua",
+                            "info": "init guidance stream",   
+                            "lua": "_Audio_Set_Guidance"
+                        }
+                },
+                {
+                    "label": "Notification",
+                    "actions": {
+                            "label": "notification-control-lua",
+                            "info": "init notification stream",   
+                            "lua": "_Audio_Set_Notification"
+                        }
+                },
+                {
+                    "label": "Communications",
+                    "actions": {
+                            "label": "communications-control-lua",
+                            "info": "init communications stream",   
+                            "lua": "_Audio_Set_Communications"
+                        }
+                },
+                {
+                    "label": "Entertainment",
+                    "actions": {
+                            "label": "entertainment-control-lua",
+                            "info": "init entertainment stream",   
+                            "lua": "_Audio_Set_Entertainment"
+                        }
+                },
+                {
+                    "label": "System",
+                    "actions": {
+                            "label": "system-control-lua",
+                            "info": "init system stream",   
+                            "lua": "_Audio_Set_system"
+                        }
+                },
+                {
+                    "label" : "duckGuidance", 
+                    "info"  : "Duck Guidance stream",
+                    "lua" : "_Audio_Duck_Guidance"
+                },
+                {
+                    "label" : "duckEntertainment", 
+                    "info"  : "Duck entertainment stream",
+                    "lua" : "_Audio_Duck_Entertainment"
+                },
+                {
+                    "label" : "duckNotification", 
+                    "info"  : "Duck notification stream",
+                    "lua" : "_Audio_Duck_Notification"
+                },
+                {
+                    "label" : "duckCommunication", 
+                    "info"  : "Duck Communication stream",
+                    "lua" : "_Audio_Duck_Communication"
+                },
+                {
+                    "label" : "duckSystem", 
+                    "info"  : "Duck System stream",
+                    "lua" : "_Audio_Duck_System"
+                },
+                {
+                    "label" : "setVolume", 
+                    "info"  : "Set the volume on an audio stream",
+                    "lua" : "_Audio_Set_Volume"
+                },
+                {
+                    "label" : "setEvent", 
+                    "info"  : "Set an Event",
+                    "lua" : "_Audio_Set_Event"
+                },
+                {
+                    "label" : "setProperty", 
+                    "info"  : "Set an stream Property",
+                    "lua" : "_Audio_Set_Property"
+                },
+                {
+                    "label" : "setState", 
+                    "info"  : "Set an stream state",
+                    "lua" : "_Audio_Set_State"
+                },
+                {
+                    "label": "multi-step-sample",
+                    "info" : "all actions must succeed for control to be accepted",
+                    "actions": [{
+                            "label": "multimedia-control-cb",
+                            "info": "Call Sharelib Sample Callback",
+                            "callback": "sampleControlNavigation",
+                            "args": {
+                                "arg1": "snoopy",
+                                "arg2": "toto"
+                            }
+                        },
+                        {
+                            "label": "navigation-control-lua",
+                            "info": "Call Lua Script to set Navigation",   
+                            "lua": "_Audio_Set_Navigation"
+                        }]
+                }
+            ],
+    "events":
+            [
+                {
+                    "label": "SampleEvent1",
+                    "info": "define action when receiving a given event",
+                    "actions": [
+                        {
+                            "label": "Event Callback-1",
+                            "callback": "SampleControlEvent",
+                            "args": {
+                                "arg": "action-1"
+                            }
+                        }, {
+                            "label": "Event Callback-2",
+                            "callback": "SampleControlEvent",
+                            "args": {
+                                "arg": "action-2"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "label": "SampleEvent2",
+                    "info": "define action when receiving a given event",
+                    "actions": [
+                        {
+                            "label": "Event Callback-1",
+                            "callback": "SampleControlEvent",
+                            "args": {
+                                "arg": "action-1"
+                            }
+                        }, {
+                            "label": "Event Callback-2",
+                            "callback": "SampleControlEvent",
+                            "args": {
+                                "arg": "action-2"
+                            }
+                        }
+                    ]
+                }
+            ]
+}
+

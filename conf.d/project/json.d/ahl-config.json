@@ -1,0 +1,113 @@
+{
+    "version": "0.2.0",
+    "description": "High-level binding configuration file",
+    "todo": "Add interupt behavior in audio role attribute",
+    "note": "Devices and routings are always listed in order of priority (for device selection rules)",
+    "hal_list": ["ensoniq","dummy"],
+    "state_list": [	
+    	{"name": "mute", "id": 0, "default_val": "off"},
+    	{"name": "active", "id": 1, "default_val": "off"}
+    ],
+    "audio_roles": [
+        {
+            "name": "Warning",
+            "id": 0,
+            "description": "Safety-relevant or critical alerts/alarms",
+            "priority": 100,
+            "output": [
+                "Alsa.Warning_Main",
+                "Alsa.Warning_DriverHR"
+            ]
+        },
+        {
+            "name": "Guidance",
+            "id": 1,
+            "description": "Important user information where user action is expected (e.g. navigation instruction)",
+            "priority": 25,
+            "output": [
+                "Alsa.Guidance_Main",
+                "Alsa.Guidance_DriverHR"
+            ]
+        },
+        {
+            "name": "Notification",
+            "id": 2,
+            "description": "HMI or else notifications (e.g. touchscreen events, speech recognition on/off,...)",
+            "priority": 0,
+            "output": [
+                "Alsa.Notification_Main",
+                "Alsa.Notification_DriverHR"
+            ]
+        },
+        {
+            "name": "Communication",
+            "id": 3,
+            "description": "Voice communications (e.g. handsfree, speech recognition)",
+            "priority": 50,
+            "output": [
+                "Alsa.Communications_Main",
+                "Alsa.Communications_DriverHR",
+                "Pulse.bluez*"
+            ],
+            "input": [
+                "Alsa.hw:0",
+                "Pulse.bluez*"
+            ]
+        },
+        {
+            "name": "Entertainment",
+            "id": 4,
+            "description": "Multimedia content (e.g. tuner, media player, etc.)",
+            "priority": 0,
+            "output": [
+                "Alsa.Entertainment_Main",
+                "Alsa.Entertainment_DriverHR",
+                "Alsa.Entertainment_RSE",
+                "Alsa.HDA*",
+                "Alsa.USB*",
+                "Pulse.bluez*"
+            ],
+            "input": [
+                "Alsa.AuxIn",
+                "Alsa.USB*",
+                "Pulse.bluez*"
+            ]
+        },
+        {
+            "name": "System",
+            "id": 5,
+            "description": "System level content or development",
+            "priority": 100,
+            "output": [
+                "Alsa.hw:0"
+            ],
+            "input": [
+                "Alsa.hw:0"
+            ]
+        },
+        {
+            "name": "Startup",
+            "id": 6,
+            "description": "Early (startup) sound",
+            "priority": 100,
+            "output": [
+                "Alsa.hw:0"
+            ],
+            "input": [
+                "Alsa.hw:0"
+            ]
+        },
+        {
+            "name": "Shutdown",
+            "id": 7,
+            "description": "Late (shutdown) sound",
+            "priority": 100,
+            "output": [
+                "Alsa.hw:0"
+            ],
+            "input": [
+                "Alsa.hw:0"
+            ]
+        }
+    ]
+}

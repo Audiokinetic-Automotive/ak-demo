@@ -1,2 +1,2 @@
-# ak-demo
-Audiokinetic AGL Demo
+# AudioHighLevel-afb
+afb-ak-demo
