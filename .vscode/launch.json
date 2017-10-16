@@ -1,0 +1,100 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "DebugAKDemo",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/../opt/bin/afb-daemon",
+            "args": [
+                "--workdir=.",
+                "--ldpaths=./lib:../afb-audiohighlevel/lib/afb-audiohighlevel.so:../afb-aaaa/lib/afb-hal-ensoniq.so:../afb-aaaa/lib/afb-hal-dummy.so:../afb-aaaa/lib/afb-alsa-lowlevel.so:../afb-audiobackend/lib/afb-audiobackend.so",
+		        "--alias=/monitoring:../afb-monitoring",
+                "--port=1234",
+                "--roothttp=./htdocs",
+                "--token=\"\"",
+                "--verbose"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceRoot}/../opt/afb-ak-demo",
+            "preLaunchTask": "",
+            "environment":[{"name": "LD_LIBRARY_PATH","value": "/home/fthibault/opt/lib"},
+                           {"name": "MEDIA_LOCATION","value": "/home/fthibault/opt/afb-ak-demo/htdocs/audio"}],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "DebugHLB",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/../opt/bin/afb-daemon",
+            "args": [
+                "--workdir=.",
+                "--ldpaths=./lib:../afb-aaaa/lib/afb-hal-ensoniq.so:../afb-aaaa/lib/afb-hal-dummy.so:../afb-aaaa/lib/afb-alsa-lowlevel.so:../afb-audiobackend/lib/afb-audiobackend.so",
+		        "--alias=/monitoring:../afb-monitoring",
+                "--port=1234",
+                "--roothttp=./htdocs",
+                "--token=\"\"",
+                "--verbose",
+                "--verbose",
+                "--verbose",
+                "--tracereq=all",
+                "--traceditf=all"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceRoot}/../opt/afb-audiohighlevel",
+            "preLaunchTask": "",
+            "environment":[{"name": "LD_LIBRARY_PATH","value": "/home/fthibault/opt/lib"},
+                          {"name": "MEDIA_LOCATION","value": "/home/fthibault/opt/music"}],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "DebugHLBNoDummy",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/../opt/bin/afb-daemon",
+            "args": [
+                "--workdir=.",
+                "--ldpaths=./lib:../afb-aaaa/lib/afb-hal-ensoniq.so:../afb-aaaa/lib/afb-alsa-lowlevel.so",
+                "--port=1234",
+                "--roothttp=./htdocs",
+                "--token=\"\"",
+                "--verbose",
+                "--verbose"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceRoot}/../opt/afb-audiohighlevel",
+            "preLaunchTask": "",
+            "environment": [
+                {
+                    "name": "LD_LIBRARY_PATH",
+                    "value": "/home/fthibault/opt/lib"
+                }
+            ],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}

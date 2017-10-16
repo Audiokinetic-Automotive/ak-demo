@@ -13,10 +13,13 @@ git clone https://github.com/Audiokinetic-Automotive/ak-demo.git
 # Dependencies
 --------------------------------------------------------
 
-This demo need two other bindings afb-aaaa and afb-audiohighlevel
+This demo need three other bindings afb-aaaa, afb-audiohighlevel and afb-audiobackend
 
 # afb-audiohighlevel
 git clone git@github.com:Audiokinetic-Automotive/afb-audiohighlevel.git
+
+# afb-audiobackend
+git clone git@github.com:Audiokinetic-Automotive/afb-audiobackend.git
 
 #afb-aaaa (fork branch)
 git clone --recurse-submodules git@github.com:huetaivuong/afb-aaaa.git

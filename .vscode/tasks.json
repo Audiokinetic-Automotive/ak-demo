@@ -1,0 +1,127 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "taskName": "CMakeHLB",
+            "command": "source ./afb-ak-demo/scripts/AGLAudioBuildRunEnv.sh ; cd ./afb-audiohighlevel/build ; cmake -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX ..",
+            "type": "shell",
+            "problemMatcher": []
+        },
+        {
+            "taskName": "MakeHLB",
+            "command": "source ./afb-ak-demo/scripts/AGLAudioBuildRunEnv.sh ; cd ./afb-audiohighlevel/build ; make ; make install",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": "absolute"
+            }
+        },
+        {
+            "taskName": "CleanHLB",
+            "command": "source ./afb-ak-demo/scripts/AGLAudioBuildRunEnv.sh ; cd ./afb-audiohighlevel/build ; make clean",
+            "type": "shell",
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": "absolute"
+            }
+        },
+        {
+            "taskName": "CMakeAudioD",
+            "command": "source ./afb-ak-demo/scripts/AGLAudioBuildRunEnv.sh ; cd ./afb-audiobackend/build ; cmake -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX ..",
+            "type": "shell",
+            "problemMatcher": []
+        },
+        {
+            "taskName": "MakeAudioD",
+            "command": "source ./afb-ak-demo/scripts/AGLAudioBuildRunEnv.sh ; cd ./afb-audiobackend/build ; make ; make install",
+            "type": "shell",
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": "absolute"
+            }
+        },
+        {
+            "taskName": "CleanAudioD",
+            "command": "source ./afb-ak-demo/scripts/AGLAudioBuildRunEnv.sh ; cd ./afb-audiobackend/build ; make clean",
+            "type": "shell",
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": "absolute"
+            }
+        },
+        {
+            "taskName": "CMakeAKDemo",
+            "command": "source ./afb-ak-demo/scripts/AGLAudioBuildRunEnv.sh ; cd ./afb-ak-demo/build ; cmake -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX ..",
+            "type": "shell",
+            "problemMatcher": []
+        },
+        {
+            "taskName": "MakeAKDemo",
+            "command": "source ./afb-ak-demo/scripts/AGLAudioBuildRunEnv.sh ; cd ./afb-ak-demo/build ; make ; make install",
+            "type": "shell",
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": "absolute"
+            }
+        },
+        {
+            "taskName": "CleanAKDemo",
+            "command": "source ./afb-ak-demo/scripts/AGLAudioBuildRunEnv.sh ; cd ./afb-ak-demo/build ; make clean",
+            "type": "shell",
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": "absolute"
+            }
+        },
+        {
+            "taskName": "CMakeAAAA",
+            "command": "source ./afb-ak-demo/scripts/AGLAudioBuildRunEnv.sh ; cd ./afb-aaaa/build ; cmake -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX ..",
+            "type": "shell",
+            "problemMatcher": []
+        },
+        {
+            "taskName": "MakeAAAA",
+            "command": "source ./afb-ak-demo/scripts/AGLAudioBuildRunEnv.sh ; cd ./afb-aaaa/build ; make ; make install",
+            "type": "shell",
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": "absolute"
+            }
+        },
+
+        {
+            "taskName": "sourceEnv",
+            "command": "source ./afb-ak-demo/scripts/AGLAudioBuildRunEnv.sh",
+            "type": "shell",
+            "problemMatcher": []
+        },
+        {
+            "taskName": "runHLBBinderVerbose",
+            "command": "source ./afb-ak-demo/scripts/AGLAudioBuildRunEnv.sh ; cd ~/opt/afb-audiohighlevel ; afb-daemon --workdir=. --ldpaths=./lib --binding=../afb-aaaa/lib/afb-hal-ensoniq.so --binding=../afb-aaaa/lib/afb-hal-dummy.so --binding=../afb-aaaa/lib/afb-alsa-lowlevel.so --port=1234  --roothttp=./htdocs --token=\"\" --verbose --verbose --verbose --tracereq=all --traceditf=all",
+            "type": "shell",
+            "problemMatcher": []       
+        },
+        {
+            "taskName": "runHLBBinder",
+            "command": "source ./afb-ak-demo/scripts/AGLAudioBuildRunEnv.sh ; cd ~/opt/afb-audiohighlevel ; afb-daemon --workdir=. --ldpaths=./lib  --binding=../afb-aaaa/lib/afb-hal-ensoniq.so --binding=../afb-aaaa/lib/afb-hal-dummy.so --binding=../afb-aaaa/lib/afb-alsa-lowlevel.so --port=1234  --roothttp=./htdocs --token=\"\"",
+            "type": "shell",
+            "problemMatcher": []
+        },
+        {
+            "taskName": "runHLBBinderNoDummy",
+            "command": "source ./afb-ak-demo/scripts/AGLAudioBuildRunEnv.sh ; cd ~/opt/afb-audiohighlevel ; afb-daemon --workdir=. --ldpaths=./lib  --binding=../afb-aaaa/lib/afb-hal-ensoniq.so --binding=../afb-aaaa/lib/afb-alsa-lowlevel.so --port=1234  --roothttp=./htdocs --token=\"\"",
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        }
+    ]
+}

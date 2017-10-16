@@ -24,6 +24,15 @@
 #     Customise your preferences in "./conf.d/cmake/config.cmake"
 #--------------------------------------------------------------------------
 
+# Add a dummy target to enable global dependency order
+# -----------------------------------------------------
+if(EXTRA_DEPENDENCIES_ORDER)
+	set(DEPENDENCIES_TARGET ${PROJECT_NAME}_extra_dependencies)
+	add_custom_target(${DEPENDENCIES_TARGET} ALL
+		DEPENDS ${EXTRA_DEPENDENCY_ORDER}
+	)
+endif()
+
 # ----------------------------------------------------------------------------
 #                                Archive target
 # ----------------------------------------------------------------------------
@@ -75,11 +84,11 @@ foreach (PKG_CONFIG ${PKG_REQUIRED_LIST})
 	# Only doable within a native environment not under SDK
 	if( OSRELEASE MATCHES "debian" AND NOT DEFINED ENV{SDKTARGETSYSROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
 		execute_process(
-			COMMAND dpkg -S *${XPREFIX}.pc
+			COMMAND pkg-config --print-provides ${XPREFIX}
 					OUTPUT_VARIABLE TMP_PKG_BIN
 		)
 		if(TMP_PKG_BIN)
-			string(REGEX REPLACE ":.*$" "" PKG_BIN ${TMP_PKG_BIN})
+			string(REGEX REPLACE " *=.*$" "" PKG_BIN ${TMP_PKG_BIN})
 			set(DEB_PKG_DEPS "${DEB_PKG_DEPS} ${PKG_BIN} ${DEB_EXTRA_DEP}")
 		else()
 			message(FATAL_ERROR "-- ${Red}${XPREFIX} development files not installed. Abort.${ColourReset}")

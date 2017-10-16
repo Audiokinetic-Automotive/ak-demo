@@ -7,6 +7,7 @@ export AK_SDK_INCLUDE=$HOME/project/wwise_main/SDK/include
 export AK_AUTO_INCLUDE=$HOME/project/wwise_main/Automotive/common/include
 export CONTROL_LUA_PATH=~/agl/afb-ak-demo/conf.d/project/lua.d
 export CONTROL_CONFIG_PATH=~/agl/afb-ak-demo/conf.d/project/json.d
+export MEDIA_LOCATION=$HOME/opt/afb-ak-demo/htdocs/audio
 PATH=$INSTALL_PREFIX/bin:$PATH 
 RSYNC_TARGET=MY_TARGET_HOSTNAME
 RSYNC_PREFIX=./opt

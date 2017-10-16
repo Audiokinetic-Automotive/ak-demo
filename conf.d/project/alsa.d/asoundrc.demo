@@ -10,8 +10,8 @@ pcm.SoftMixer {
     # Define target effective sound card (cannot be a plugin)
     slave { 
         pcm "hw:0"  # Main sound card
-        periods 8 
-        period_size 128 
+        buffer_size 4096
+        period_size 1024
     }
 
     # DMIX can only map two channels
@@ -30,6 +30,8 @@ pcm.SoftMixer_DriverHR {
     # Define target effective sound card (cannot be a plugin)
     slave { 
         pcm "hw:1"  # Alternate sound card / dummy
+        buffer_size 4096
+        period_size 1024
     }
 
     # DMIX can only map two channels
@@ -48,6 +50,8 @@ pcm.SoftMixer_RSE {
     # Define target effective sound card (cannot be a plugin)
     slave { 
         pcm "hw:2"  # Alternate sound card / dummy
+        buffer_size 4096
+        period_size 1024
     }
 
     # DMIX can only map two channels

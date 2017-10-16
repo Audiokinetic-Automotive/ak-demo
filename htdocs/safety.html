@@ -1,0 +1,87 @@
+<html>
+
+<head>
+    <title>ADAS</title>
+
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="stylesheet" href="safety.css">
+
+    <script type="text/javascript" src="AFB-websock.js"></script>
+    <script type="text/javascript" src="HLBPolicyDemo.js"></script>
+</head>
+
+<body class="page-content" onload="init('warning',1)" onunload="term()">
+
+    <table style="width:100%; margin-top:20px;">
+        <tr>
+            <td> <img id="logo-iot" src="assets/iot-bzh-logo-small.png"></td>
+            <td style="width:70%; text-align:center;">
+                <h1 id="title">Safety</h1>
+            </td>
+            <td> <button class="btn-conn" id="connected" onclick="init('warning',1)">Binder Connection Fail</button></td>
+        </tr>
+            <td></td>
+            <td style="width:70%;"></td>
+            <td><button id="monitoring" onclick="window.open('/monitoring/monitor.html','_monitor_demo')">Debug / Monitoring</a></button></td>
+        </tr>
+    </table>
+
+    <div class="dashboard">
+
+        <table class="panel-table">
+            <th>Zone/Device</th>
+            <th></th> 
+            <th>ADAS Warning</th>
+            <th></th>  
+            <th></th> 
+            <th>Volume</th>
+            <th>Mute</th>
+            <tr>
+                <td class="panel-music-zones">
+                    <select class="zones" id="musicZonesSelect" onchange="changeZone(this.value)"></select>
+                </td>
+                <td class="panel-music-playlist">
+                    <select class="playlist" id="musicSelect" onchange="setMedia()">
+                        <option selected value='warning/ADAS_Warning_Clean.wav'>ADAS</option>
+                    </select>
+                </td>
+                <td class="play-ctl">
+                    <button id="play" onclick="play()">Play</button>
+                </td>
+                <td class="pause-ctl">
+                    <button id="pause" onclick="pause()">Pause</button>
+                </td>
+                <td class="stop-ctl">
+                    <button id="stop" onclick="stop()">Stop</button>
+                </td>
+                <td class="panel-volume">
+                    <button class="btn-incdec" onclick="volumeDec()">-</button>
+                    <input class="sound" id="volume" type="text" maxlength="3" min="0" max="100" step="5" on>
+                    <button class="btn-incdec" onclick="volumeInc()">+</button>
+                </td>
+                <td class="panel-mute">
+                    <label><input type='checkbox' onclick='mute(this);'></label> 
+                </td>              
+            </tr>
+        </table>
+
+        <div class="panel-logger">
+            <h2>Logger</h2>
+            <table class="table-logger">
+                <th>Commands / Responses: </th>
+                <th>Events: </th>
+                <tr>
+                    <td>
+                        <pre id="logger-cmd"></pre>
+                    </td>
+                    <td>
+                        <pre id="logger-event"></pre>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>

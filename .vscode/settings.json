@@ -1,0 +1,45 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/build": true,
+        "**/Makefile.in": true,
+        "**/.log": true,
+        "**/alsa-lib-1.1.4": true,
+        "**/libmicrohttpd-0.9.55": true,
+        "**/app-framework-binder": true,
+        "**/conf.d": true
+
+    },
+    "files.associations": {
+        "bitset": "c",
+        "chrono": "c",
+        "typeindex": "c",
+        "typeinfo": "c",
+        "wrap-json.h": "c",
+        "atomic": "c",
+        "*.tcc": "cpp",
+        "system_error": "cpp",
+        "any": "c",
+        "array": "c",
+        "string_view": "c",
+        "functional": "c",
+        "ratio": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c",
+        "ahl-binding.h": "c",
+        "pcm.h": "c",
+        "future": "c",
+        "istream": "c",
+        "fstream": "c",
+        "audio-common.h": "c",
+        "optional": "c",
+        "thread": "c",
+        "sstream": "c"
+    }
+}

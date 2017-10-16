@@ -1,0 +1,285 @@
+body.page-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100%;
+    width: auto;
+    text-align: center;
+    background: url("assets/content-background-car-wide.png") 0 0 no-repeat;
+    background-color: #303a40;
+    background-size: cover;
+    background-position: center;
+    color: #FFFFFF;
+}
+
+#logo-iot {
+    align-self: left;
+    height: 60px;
+}
+
+#title {
+    margin: 0;
+}
+
+#connected {
+    width: 80%
+}
+
+#monitoring {
+    background-color: yellow;
+    width: 80%
+}
+
+.dashboard {
+    height: 95%;
+    width: 80%;
+    text-align: center;
+    margin: auto;
+}
+
+.btn-bar,
+.info-bar {
+    display: flex;
+    margin: auto;
+    text-align: center;
+    height: 10%;
+}
+
+.btn-barbar {
+    display: flex;
+    margin: auto;
+}
+
+#info-text {
+    color: greenyellow;
+    margin: auto;
+}
+
+button.btn-icon {
+    background-color: transparent;
+    border: 0;
+    margin: 1em;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: block;
+    width: 60px;
+    height: 60px;
+}
+
+button.btn-conn {
+    align-self: flex-end;
+    opacity: 0.7;
+}
+
+#phone-call {
+    background-image: url("assets/phone-call.png");
+}
+
+#navigation {
+    background-image: url("assets/messages.png");
+}
+
+#music {
+    background-image: url("assets/music-play.png");
+}
+
+#emergency {
+    background-image: url("assets/emergency.png");
+}
+
+input.speed,
+input.sound,
+select.playlist,
+select.zones,
+button.btn-incdec {
+    font-size: large;
+}
+
+input.speed,
+input.sound {
+    width: 5pc;
+}
+
+/* Always should input up/down arrows */
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    opacity: 1;
+}
+
+button.btn-incdec {
+    width: 1em;
+    padding: 0;
+}
+
+button.btn-playctls {
+    width: 1em;
+    padding: 0;
+}
+
+select.playlist,
+select.zones {
+    width: 90%;
+}
+
+#logger-cmd,
+#logger-event {
+    text-align: left;
+    opacity: 0.9;
+    overflow: auto;
+    outline: 1px solid #ccc;
+    padding: 5px;
+    margin: 5px;
+    white-space: pre-wrap;
+    min-height: 20pc;
+    height: 100%;
+}
+
+table.panel-table,
+table.table-logger {
+    border: 0;
+    margin: auto;
+    width: 100%;
+}
+
+table.panel-table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+td.panel-volume {
+    width: 25%;
+    visibility: hidden;
+}
+
+td.panel-mute {
+    width: 25%;
+    visibility: hidden;
+}
+
+td.panel-speed {
+    width: 25%;
+}
+
+
+td.play-ctl {
+    width: 25%;
+    visibility: hidden;
+}
+
+td.stop-ctl {
+    width: 25%;
+    visibility: hidden;
+}
+
+td.pause-ctl {
+    width: 25%;
+    visibility: hidden;
+}
+
+td.panel-music-playlist {
+    width: 40%;
+    visibility: hidden;
+}
+
+td.panel-music-zones {
+    width: 20%;
+    visibility: hidden;
+}
+
+td.panel-nav-playlist,
+td.panel-emergency-playlist {
+    width: 50%;
+}
+
+div.panel-logger {
+    height: 70%;
+}
+
+table.table-logger {
+    height: inherit;
+}
+
+table.table-logger td {
+    width: 50%;
+}
+
+table.table-logger th {
+    height: 1em;
+    font-size: small;
+    font-family: monospace;
+}
+
+table.table-logger tr {
+    font-family: monospace;
+}
+
+.action-command {
+    color: yellow;
+    text-decoration: underline;
+}
+
+.action-reply {
+    color: greenyellow;
+    text-decoration: underline;
+}
+
+.action-error {
+    color: red;
+    text-decoration: underline;
+}
+
+.action-event {
+    color: violet;
+    text-decoration: underline;
+}
+
+.string {
+    color: lightskyblue;
+}
+
+.number {
+    color: darkorange;
+}
+
+.boolean {
+    color: deepskyblue;
+}
+
+.null {
+    color: magenta;
+}
+
+.key {
+    color: red;
+}
+
+#phone-call.btn-icon.shake,
+#navigation.btn-icon.shake,
+#emergency.btn-icon.shake {
+    animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+    transform: translate3d(0, 0, 0);
+}
+
+@keyframes shake {
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}

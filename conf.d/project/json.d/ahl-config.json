@@ -1,13 +1,10 @@
 {
     "version": "0.2.0",
+    "policy_module": "AudioPolicy_v1",
     "description": "High-level binding configuration file",
     "todo": "Add interupt behavior in audio role attribute",
     "note": "Devices and routings are always listed in order of priority (for device selection rules)",
-    "hal_list": ["ensoniq","dummy"],
-    "state_list": [	
-    	{"name": "mute", "id": 0, "default_val": "off"},
-    	{"name": "active", "id": 1, "default_val": "off"}
-    ],
+    "hal_list": ["ensoniq","usbaudio"],
     "audio_roles": [
         {
             "name": "Warning",
@@ -15,9 +12,15 @@
             "description": "Safety-relevant or critical alerts/alarms",
             "priority": 100,
             "output": [
-                "Alsa.Warning_Main",
-                "Alsa.Warning_DriverHR"
-            ]
+                "alsa.plug:Warning_Main",
+                "alsa.plug:Warning_DriverHR"
+            ],
+            "events": [
+                "emergency_brake",
+                "collision_warning",
+                "blind_spot_warning"
+            ],
+            "interupt_behavior": "pause"
         },
         {
             "name": "Guidance",
@@ -25,9 +28,15 @@
             "description": "Important user information where user action is expected (e.g. navigation instruction)",
             "priority": 25,
             "output": [
-                "Alsa.Guidance_Main",
-                "Alsa.Guidance_DriverHR"
-            ]
+                "alsa.plug:Guidance_Main",
+                "alsa.plug:Guidance_DriverHR"
+            ],
+            "events": [
+                "lane_guidance_left",
+                "lane_guidance_right",
+                "destination_reached"
+            ],
+            "interupt_behavior": "continue"
         },
         {
             "name": "Notification",
@@ -35,9 +44,18 @@
             "description": "HMI or else notifications (e.g. touchscreen events, speech recognition on/off,...)",
             "priority": 0,
             "output": [
-                "Alsa.Notification_Main",
-                "Alsa.Notification_DriverHR"
-            ]
+                "alsa.plug:Notification_Main",
+                "alsa.plug:Notification_DriverHR"
+            ],
+            "events": [
+                "home",
+                "context_switch",
+                "accept",
+                "cancel",
+                "selection_change"
+            ],
+            "interupt_behavior": "cancel"
+
         },
         {
             "name": "Communication",
@@ -45,14 +63,21 @@
             "description": "Voice communications (e.g. handsfree, speech recognition)",
             "priority": 50,
             "output": [
-                "Alsa.Communications_Main",
-                "Alsa.Communications_DriverHR",
-                "Pulse.bluez*"
+                "alsa.plug:Communications_Main",
+                "alsa.plug:Communications_DriverHR",
+                "pulse.bluez*"
             ],
             "input": [
-                "Alsa.hw:0",
-                "Pulse.bluez*"
-            ]
+                "alsa.hw:0",
+                "pulse.bluez*"
+            ],
+            "events": [
+                "bt_device_connected",
+                "bt_device_disconnected",
+                "sms_received"
+            ],
+            "interupt_behavior": "continue"
+
         },
         {
             "name": "Entertainment",
@@ -60,18 +85,22 @@
             "description": "Multimedia content (e.g. tuner, media player, etc.)",
             "priority": 0,
             "output": [
-                "Alsa.Entertainment_Main",
-                "Alsa.Entertainment_DriverHR",
-                "Alsa.Entertainment_RSE",
-                "Alsa.HDA*",
-                "Alsa.USB*",
-                "Pulse.bluez*"
+                "alsa.plug:Entertainment_Main",
+                "alsa.plug:Entertainment_DriverHR",
+                "alsa.Entertainment_RSE",
+                "alsa.HDA*",
+                "alsa.USB*",
+                "pulse.bluez*"
             ],
             "input": [
-                "Alsa.AuxIn",
-                "Alsa.USB*",
-                "Pulse.bluez*"
-            ]
+                "alsa.AuxIn",
+                "alsa.USB*",
+                "pulse.bluez*"
+            ],
+            "events": [
+                "media_player_next_song"
+            ],
+            "interupt_behavior": "pause"
         },
         {
             "name": "System",
@@ -79,11 +108,12 @@
             "description": "System level content or development",
             "priority": 100,
             "output": [
-                "Alsa.hw:0"
+                "alsa.hw:0"
             ],
             "input": [
-                "Alsa.hw:0"
-            ]
+                "alsa.hw:0"
+            ],
+            "interupt_behavior": "continue"
         },
         {
             "name": "Startup",
@@ -91,11 +121,15 @@
             "description": "Early (startup) sound",
             "priority": 100,
             "output": [
-                "Alsa.hw:0"
+                "alsa.hw:0"
             ],
             "input": [
-                "Alsa.hw:0"
-            ]
+                "alsa.hw:0"
+            ],
+            "events": [
+                "welcome_sound"
+            ],
+            "interupt_behavior": "pause"
         },
         {
             "name": "Shutdown",
@@ -103,11 +137,15 @@
             "description": "Late (shutdown) sound",
             "priority": 100,
             "output": [
-                "Alsa.hw:0"
+                "alsa.hw:0"
             ],
             "input": [
-                "Alsa.hw:0"
-            ]
+                "alsa.hw:0"
+            ],
+            "events": [
+                "goodbye_sound"
+            ],
+            "interupt_behavior": "cancel"
         }
     ]
 }
