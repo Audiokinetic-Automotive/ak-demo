@@ -32,13 +32,13 @@
             }
         },
         {
-            "taskName": "CMakeAudioD",
+            "taskName": "CMakeAudioBackend",
             "command": "source ./afb-ak-demo/scripts/AGLAudioBuildRunEnv.sh ; cd ./afb-audiobackend/build ; cmake -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX ..",
             "type": "shell",
             "problemMatcher": []
         },
         {
-            "taskName": "MakeAudioD",
+            "taskName": "MakeAudioBackend",
             "command": "source ./afb-ak-demo/scripts/AGLAudioBuildRunEnv.sh ; cd ./afb-audiobackend/build ; make ; make install",
             "type": "shell",
             "problemMatcher": {
@@ -47,7 +47,7 @@
             }
         },
         {
-            "taskName": "CleanAudioD",
+            "taskName": "CleanAudioBackend",
             "command": "source ./afb-ak-demo/scripts/AGLAudioBuildRunEnv.sh ; cd ./afb-audiobackend/build ; make clean",
             "type": "shell",
             "problemMatcher": {

@@ -12,14 +12,14 @@
 		        "--alias=/monitoring:../afb-monitoring",
                 "--port=1234",
                 "--roothttp=./htdocs",
-                "--token=\"\"",
-                "--verbose"
+                "--token=\"\""
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceRoot}/../opt/afb-ak-demo",
             "preLaunchTask": "",
-            "environment":[{"name": "LD_LIBRARY_PATH","value": "/home/fthibault/opt/lib"},
-                           {"name": "MEDIA_LOCATION","value": "/home/fthibault/opt/afb-ak-demo/htdocs/audio"}],
+            "environment":[{"name": "AHL_CONFIG_FILE","value": "/home/tvuong/opt/config/ahl-config.json"},
+                           {"name": "LD_LIBRARY_PATH","value": "/home/tvuong/opt/lib"},
+                           {"name": "MEDIA_LOCATION","value": "/home/tvuong/opt/afb-ak-demo/htdocs/audio"}],
             "externalConsole": false,
             "MIMode": "gdb",
             "setupCommands": [
@@ -43,16 +43,16 @@
                 "--roothttp=./htdocs",
                 "--token=\"\"",
                 "--verbose",
-                "--verbose",
-                "--verbose",
-                "--tracereq=all",
-                "--traceditf=all"
+                "--verbose"
+
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceRoot}/../opt/afb-audiohighlevel",
             "preLaunchTask": "",
-            "environment":[{"name": "LD_LIBRARY_PATH","value": "/home/fthibault/opt/lib"},
-                          {"name": "MEDIA_LOCATION","value": "/home/fthibault/opt/music"}],
+            "environment":[{"name": "AHL_CONFIG_FILE","value": "/home/tvuong/opt/config/ahl-config.json"},
+                          {"name": "LD_LIBRARY_PATH","value": "/home/tvuong/opt/lib"},
+                          {"name": "MEDIA_LOCATION","value": "/home/tvuong/opt/afb-ak-demo/htdocs/audio"}
+                    ],
             "externalConsole": false,
             "MIMode": "gdb",
             "setupCommands": [
@@ -83,7 +83,7 @@
             "environment": [
                 {
                     "name": "LD_LIBRARY_PATH",
-                    "value": "/home/fthibault/opt/lib"
+                    "value": "/home/tvuong/opt/lib"
                 }
             ],
             "externalConsole": false,

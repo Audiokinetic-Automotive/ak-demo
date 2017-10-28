@@ -8,12 +8,7 @@
         "**/.DS_Store": true,
         "**/build": true,
         "**/Makefile.in": true,
-        "**/.log": true,
-        "**/alsa-lib-1.1.4": true,
-        "**/libmicrohttpd-0.9.55": true,
-        "**/app-framework-binder": true,
-        "**/conf.d": true
-
+        "**/.log": true
     },
     "files.associations": {
         "bitset": "c",
@@ -40,6 +35,7 @@
         "audio-common.h": "c",
         "optional": "c",
         "thread": "c",
-        "sstream": "c"
+        "sstream": "c",
+        "glib.h": "c"
     }
 }

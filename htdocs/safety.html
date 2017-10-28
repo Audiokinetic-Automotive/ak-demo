@@ -10,7 +10,7 @@
     <script type="text/javascript" src="HLBPolicyDemo.js"></script>
 </head>
 
-<body class="page-content" onload="init('warning',1)" onunload="term()">
+<body class="page-content" onload="init('Warning',1)" onunload="term()">
 
     <table style="width:100%; margin-top:20px;">
         <tr>
@@ -57,7 +57,7 @@
                 </td>
                 <td class="panel-volume">
                     <button class="btn-incdec" onclick="volumeDec()">-</button>
-                    <input class="sound" id="volume" type="text" maxlength="3" min="0" max="100" step="5" on>
+                    <input class="sound" id="volume" type="text" maxlength="3" min="0" max="100" step="5" onchange="volumeUpdate(this.value)">
                     <button class="btn-incdec" onclick="volumeInc()">+</button>
                 </td>
                 <td class="panel-mute">

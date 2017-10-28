@@ -2,7 +2,6 @@
     "version": "0.2.0",
     "policy_module": "AudioPolicy_v1",
     "description": "High-level binding configuration file",
-    "todo": "Add interupt behavior in audio role attribute",
     "note": "Devices and routings are always listed in order of priority (for device selection rules)",
     "hal_list": ["ensoniq","usbaudio"],
     "audio_roles": [
@@ -55,7 +54,6 @@
                 "selection_change"
             ],
             "interupt_behavior": "cancel"
-
         },
         {
             "name": "Communication",
@@ -65,11 +63,9 @@
             "output": [
                 "alsa.plug:Communications_Main",
                 "alsa.plug:Communications_DriverHR",
-                "pulse.bluez*"
             ],
             "input": [
                 "alsa.hw:0",
-                "pulse.bluez*"
             ],
             "actions": [
                 "bt_device_connected",
@@ -77,7 +73,6 @@
                 "sms_received"
             ],
             "interupt_behavior": "continue"
-
         },
         {
             "name": "Entertainment",
@@ -87,18 +82,6 @@
             "output": [
                 "alsa.plug:Entertainment_Main",
                 "alsa.plug:Entertainment_DriverHR",
-                "alsa.Entertainment_RSE",
-                "alsa.HDA*",
-                "alsa.USB*",
-                "pulse.bluez*"
-            ],
-            "input": [
-                "alsa.AuxIn",
-                "alsa.USB*",
-                "pulse.bluez*"
-            ],
-            "actions": [
-                "media_player_next_song"
             ],
             "interupt_behavior": "pause"
         },
@@ -123,9 +106,6 @@
             "output": [
                 "alsa.hw:0"
             ],
-            "input": [
-                "alsa.hw:0"
-            ],
             "actions": [
                 "welcome_sound"
             ],
@@ -137,9 +117,6 @@
             "description": "Late (shutdown) sound",
             "priority": 100,
             "output": [
-                "alsa.hw:0"
-            ],
-            "input": [
                 "alsa.hw:0"
             ],
             "actions": [

@@ -11,7 +11,7 @@
     <script type="text/javascript" src="HLBPolicyDemo.js"></script>
 </head>
 
-<body class="page-content" onload="init('entertainment',1)" onunload="term()">
+<body class="page-content" onload="init('Entertainment',1)" onunload="term()">
 
     <table style="width:100%; margin-top:20px;">
         <tr>
@@ -44,14 +44,10 @@
                 </td>
                 <td class="panel-music-playlist">
                     <select class="playlist" id="musicSelect" onchange="setMedia()">
-                        <option selected value='entertainment/01_Welcome_To_NewYork.wav'>01 - Welcome To NewYork</option>
-                        <option selected value='entertainment/02_Blank_Space.wav'>02 - Blank Space</option>
-                        <option selected value='entertainment/03_Style.wav'>03 - Style</option>
-                        <option selected value='entertainment/chan_chan.wav'>04 - Chan Chan</option>
-                        <option selected value='entertainment/all_about_that_bass.wav'>05 - All about that bass</option>
-                        <option selected value='entertainment/animal.wav'>06 - Animal</option>
-                        <option selected value='entertainment/get_lucky.wav'>07 - Get Lucky</option>
-                        <option value='entertainment/Sine.wav'>08 - Sine Tone</option>
+                        <option selected value='entertainment/rock.wav'>rock</option>
+                        <option selected value='entertainment/acoustic.wav'>acoustic</option>
+                        <option selected value='entertainment/jazz.wav'>jazz</option>
+                        <option value='entertainment/Sine.wav'>Sine Tone</option>
                     </select>
                 </td>
                 <td class="play-ctl">
@@ -65,7 +61,7 @@
                 </td>
                 <td class="panel-volume">
                     <button class="btn-incdec" onclick="volumeDec()">-</button>
-                    <input class="sound" id="volume" type="text" maxlength="3" min="0" max="100" step="5" on>
+                    <input class="sound" id="volume" type="text" maxlength="3" min="0" max="100" step="5" onchange="volumeUpdate(this.value)">
                     <button class="btn-incdec" onclick="volumeInc()">+</button>
                 </td>
                 <td class="panel-mute">
