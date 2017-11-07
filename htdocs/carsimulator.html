@@ -41,7 +41,7 @@
             <tr>
                 <td class="panel-speed">
                     <button class="btn-incdec" onclick="speedDec()">-</button>
-                    <input class="speed" id="speed" type="text" maxlength="3" min="0" max="500" step="5" >
+                    <input class="speed" id="speed" type="text" maxlength="3" min="0" max="200" step="5" onchange="speedUpdate(this.value)">
                     <button class="btn-incdec" onclick="speedInc()">+</button>
                 </td>
                 <td class="panel-music-zones">

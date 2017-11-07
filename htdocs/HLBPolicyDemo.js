@@ -106,7 +106,7 @@ var SPEED_INCREMENT = 5;
 
 function initVolume() {
     var elVolume = document.getElementById("volume");
-    return callbinder('audiohl', 'get_volume', { 'endpoint_type': 'sink', 'endpoint_id':endpoint_id })
+    return callbinder('ahl-4a', 'volume', { 'endpoint_type': 'sink', 'endpoint_id':endpoint_id })
         .then(function (res) {
             elVolume.value = res.response;
         })
@@ -134,18 +134,18 @@ function volumeUpdateInput(val) {
     elVolume.value = volume.toString();
     console.log("New volume value: " + volume)
 
-    callbinder('audiohl', 'set_volume', { 'endpoint_type': 'sink', 'endpoint_id': endpoint_id, 'volume': volume.toString() })
+    callbinder('ahl-4a', 'volume', { 'endpoint_type': 'sink', 'endpoint_id': endpoint_id, 'volume': volume.toString() })
 
     console.log("Set volume done")
 }
 
-function speedUpdate(val) {
+function speedUpdateInput(val) {
     console.log("speed update call with: " + val);
     var elSpeed = document.getElementById("speed");
     var speed = parseInt(elSpeed.value.split(' ')[0]);
     console.log("Old speed value: " + speed);
     if ((speed == 0 && val < 0) ||
-        (speed == 500 && val > 0)) {
+        (speed == 200 && val > 0)) {
         return;
     }
     speed += val;
@@ -173,19 +173,27 @@ function volumeUpdateUI(val) {
 function volumeUpdate(val) {
     console.log("volume update call with: " + val);
     var elVolume = document.getElementById("volume");
-    var volume = parseInt(elVolume.value.split(' ')[0]);
-    console.log("Old volume value: " + volume);
     if ((val < 0) ||
-        (volume > 100)) {
+        (val > 100)) {
         return;
     }
 
-    elVolume.value = volume.toString();
-    console.log("New volume value: " + volume)
-
-    callbinder('audiohl', 'set_volume', { 'endpoint_type': 'sink', 'endpoint_id': endpoint_id, 'volume': volume.toString() })
-
+    elVolume.value = val.toString();
+    callbinder('ahl-4a', 'volume', { 'endpoint_type': 'sink', 'endpoint_id': endpoint_id, 'volume': volume.toString() })
     console.log("Set volume done")
+}
+
+function speedUpdate(val) {
+    console.log("speed update call with: " + val);
+    var elSpeed = document.getElementById("speed");
+    if ((val < 0) ||
+        (val > 200)) {
+        return;
+    }
+
+    elSpeed.value = val.toString();
+    callbinder('audiod', 'post_event', { 'event_name': 'speed', 'event_parameter': { 'speed_value': speed } })
+    console.log("Set speed done")
 }
 
 
@@ -203,38 +211,38 @@ function volumeDec() {
 
 function speedInc() {
     console.log("Speed increment clicked");
-    speedUpdate(SPEED_INCREMENT);
+    speedUpdateInput(SPEED_INCREMENT);
     console.log("Set speed done")
 }
 
 function speedDec() {
     console.log("Speed decrement clicked");
-    speedUpdate(0 - SPEED_INCREMENT);
+    speedUpdateInput(0 - SPEED_INCREMENT);
     console.log("Set speed done")
 }
 
 function mute(cb) {
     console.log("Mute clicked, new value = " + cb.checked); 
 
-    callbinder('audiohl', 'set_stream_mute', { 'stream_id': stream_id, 'mute': cb.checked ? 'on' : 'off' })
+    callbinder('ahl-4a', 'set_stream_state', { 'stream_id': stream_id, 'mute': cb.checked ? 'on' : 'off' })
 }
 
 function play() {
     console.log("Play clicked")
 
-     callbinder('audiohl', 'set_stream_state', { 'stream_id': stream_id, 'state': 'running' })
+     callbinder('ahl-4a', 'set_stream_state', { 'stream_id': stream_id, 'state': 'running' })
 }
 
 function pause() {
     console.log("Pause clicked");
 
-     callbinder('audiohl', 'set_stream_state', { 'stream_id': stream_id, 'state': 'paused' })
+     callbinder('ahl-4a', 'set_stream_state', { 'stream_id': stream_id, 'state': 'paused' })
 }
 
 function stop() {
     console.log("Stop clicked");
 
-    callbinder('audiohl', 'set_stream_state', { 'stream_id': stream_id, 'state': 'idle' })
+    callbinder('ahl-4a', 'set_stream_state', { 'stream_id': stream_id, 'state': 'idle' })
 }
 
 function setMedia() {
@@ -280,7 +288,7 @@ function InitStream(endpointID) {
     if (endpointID == -1) {
         // Open stream on default sink endpoint
         console.log("Using default endpoint");
-        callbinder('audiohl', 'stream_open', { 'audio_role': audio_role, 'endpoint_type': 'sink' })
+        callbinder('ahl-4a', 'stream_open', { 'audio_role': audio_role, 'endpoint_type': 'sink' })
             .then(function (res) {
                 stream_id = res.response.stream_id;
                 endpoint_id = res.response.endpoint_info.endpoint_id;
@@ -296,7 +304,7 @@ function InitStream(endpointID) {
     }
     else {
         console.log("Using endpoint id : " + endpointID);
-        callbinder('audiohl', 'stream_open', { 'audio_role': audio_role, 'endpoint_type': 'sink', 'endpoint_id': parseInt(endpointID) })
+        callbinder('ahl-4a', 'stream_open', { 'audio_role': audio_role, 'endpoint_type': 'sink', 'endpoint_id': parseInt(endpointID) })
             .then(function (res) {
                 stream_id = res.response.stream_id;
                 endpoint_id = res.response.endpoint_info.endpoint_id;
@@ -314,13 +322,13 @@ function InitStream(endpointID) {
     callbinder('audiod', 'subscribe', {'events':['audiod_audio_event']})
     console.log("Registered to audio backend events");
     
-    callbinder('audiohl', 'subscribe', { 'events': ['ahl_endpoint_volume_event', 'ahl_endpoint_property_event','ahl_post_action']})
+    callbinder('ahl-4a', 'event_subscription', { 'events': ['ahl_endpoint_volume_event', 'ahl_endpoint_property_event','ahl_post_action'], 'subscribe':1})
     console.log("Registered to audio high-level events");
 }
 
 function TermStream() {
     // Close stream
-    callbinder('audiohl', 'stream_close', { 'stream_id': stream_id })
+    callbinder('ahl-4a', 'stream_close', { 'stream_id': stream_id })
         .then(function (res) {
             console.log(res.response);
         });
@@ -343,7 +351,7 @@ function init(role,looping) {
     function onopen() {
 
         // Retrieve list of role specific sinks
-        callbinder('audiohl', 'get_sinks', { 'audio_role': audio_role })
+        callbinder('ahl-4a', 'get_endpoints', { 'audio_role': audio_role, 'endpoint_type': 'sink' })
             .then(function (res) {
                 // Populate available devices/zones
                 console.log(res.response);
@@ -373,7 +381,7 @@ function init(role,looping) {
             }
             else { // Assume HLB events
                 console.log("Received event: " + obj.event);
-                if (obj.event == "audiohl/ahl_endpoint_volume_event"){
+                if (obj.event == "ahl-4a/ahl_endpoint_volume_event"){
                     console.log("Received ahl_endpoint_volume_event with endpoint_id: " + obj.data.endpoint_id);
                     console.log("Received ahl_endpoint_volume_event with endpoint_type: " + obj.data.endpoint_type);
                     console.log("Received ahl_endpoint_volume_event with value: " + obj.data.value);
@@ -384,13 +392,13 @@ function init(role,looping) {
                         volumeUpdateUI(obj.data.value);
                    }  
                 }
-                else if (obj.event == "audiohl/ahl_endpoint_property_event") {
+                else if (obj.event == "ahl-4a/ahl_endpoint_property_event") {
                     console.log("Received ahl_endpoint_property_event with endpoint_id: " + obj.data.endpoint_id);
                     console.log("Received ahl_endpoint_property_event with endpoint_type: " + obj.data.endpoint_type);
                     console.log("Received ahl_endpoint_property_event with value: " + obj.data.value);
                     console.log("Received ahl_endpoint_property_event with audio_role: " + obj.data.audio_role);
                 }
-                else if (obj.event == "audiohl/ahl_post_action") {
+                else if (obj.event == "ahl-4a/ahl_post_action") {
                     console.log("Received ahl_post_action");
                 }
                 else {
@@ -467,7 +475,7 @@ function init(role,looping) {
 
 function term() {
     // // Close stream
-    // callbinder('audiohl', 'stream_close', { 'stream_id': stream_id })
+    // callbinder('ahl-4a', 'stream_close', { 'stream_id': stream_id })
     //     .then(function (res) {
     //         console.log(res.response);
     //     });
